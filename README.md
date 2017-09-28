@@ -1,2 +1,2 @@
 # osgvGNSSDataSubmit
-Plugin to submit OSGV GNSS data for Bernese Processing
+Application to process and submit OSGV GNSS data for Bernese Processing
