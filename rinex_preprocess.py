@@ -2,7 +2,8 @@
 
 import sys, getopt
 from subprocess import run, call
-import urllib.request, json, csv
+import urllib.request, json, csv 
+import urllib.parse
 from collections import OrderedDict
 
 transtable = "vicTransTable.csv"
@@ -11,13 +12,17 @@ mark_name =''
 def get_smes (nine_fig):
 	print(nine_fig)
 	link = "https://maps.land.vic.gov.au/lvis/services/smesDataDelivery/getMarkInformation?searchType=NineFigureNumber&nineFigureNumber="+nine_fig
-	
 	with urllib.request.urlopen(link) as url:
 		s = url.read()
 	print(link)
 	get_smes.mark_name = json.loads(s.decode())["data"]["name"]
 	get_smes.mark_latitude = json.loads(s.decode())["data"]["latitude"]
 	get_smes.mark_longitude = json.loads(s.decode())["data"]["longitude"]
+	get_smes.markPostExists = json.loads(s.decode())["data"]["markPostExists"]
+	get_smes.coverExists = json.loads(s.decode())["data"]["coverExists"]
+	get_smes.markType = json.loads(s.decode())["data"]["markType"]
+	get_smes.gnssSuitability = json.loads(s.decode())["data"]["gnssSuitability"]
+	get_smes.groundToMarkOffset = json.loads(s.decode())["data"]["groundToMarkOffset"]
 	return;
 
 def get_char4 (nine_fig):
@@ -39,10 +44,63 @@ def call_teqc (char4, nine_fig, ant_hgt,ant_code, observer,mark_name, mark_latit
    print(com_teqc)
    call(com_teqc)
 
+#def update_smes (server, username, password, nine_fig, markPostExists, coverExists, markType, gnssSuitability, groundToMarkOffset):
+def smes_connect (server, username, password,nine_fig, coverExists,smesComment):
+   if server == 'PROD':
+     smes_connect.domain = 'https://maps.land.vic.gov.au/'
+   elif server == 'UAT':
+     smes_connect.domain = 'https://maps.test.land.vic.gov.au/'
+   elif server == 'SYSTEST':
+     smes_connect.domain = 'https://maps.sys.test.land.vic.gov.au/'
+   print(server)
+   link = smes_connect.domain+'lvis/services/smesSurveyMarkDataDelivery/smesUserLogin?userName='+username+'&password='+password
+   print(link)
+   with urllib.request.urlopen(link) as url:
+      s = url.read()
+   print(s)
+   smes_connect.sessionKey = json.loads(s.decode())["data"]["sessionKey"]
+   print(smes_connect.sessionKey)
+   #nine_fig = window.lineEdit_ninefig.text()
+   #coverExists = window.comboBoxCvr.currentText()
+   #smesComment = window.smesComment.text()
+   smes_update(smes_connect.sessionKey, nine_fig, coverExists,smesComment)
    
+def smes_update (sessionKey,nine_fig, coverExists,smesComment):
+   post = "{\"sessionKey\":"+sessionKey+",\"nineFigureNumber\":"+nine_fig+",\"coverExists\":"+coverExists+",\"comments\":"+smesComment+"}"
+   link = smes_connect.domain+'lvis/services/smesSurveyMarkDataDelivery/updateMarkDetailsSubmission'
+
+   data = urllib.parse.urlencode(post)
+   print(data)
+   #h = httplib.HTTPConnection(link)
+   #headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+   #h.request('POST', '', data, headers)
+   #req = urllib.Request(url,data)
+   #reponse = urllib.urlopen(req)
+   #print(response)
+   #r = h.getresponse()
+   #print(r.read())
    
-   
-   
+#{"sessionKey":<value>,
+#"nineFigureNumber":<value>,
+#"markStatus ":<value>,
+#"planNumber ":<value>,
+#"groundToMarkOffset":<value>,
+#"coverExists":<value>,
+#"markerPostExists":<value>,
+#"gnssSuitability":<value>,
+#"markType":<value>,
+#"comments":<value>,
+#"supportingFiles":{
+# "files":[ {
+# "file": <base 64 encoded byte stream>,
+# "fileName": <value>,
+# "fileExtension": <value>,
+# "fileCategory": <value>
+# }]
+#}}
+
+
+
 
 def main (argv):
    print(argv)
