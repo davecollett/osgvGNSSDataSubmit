@@ -29,11 +29,25 @@ def get_char4 (nine_fig):
     	if get_char4.y == nine_fig:
     		get_char4.char4 = get_char4.x
 
+def t0_runpk (inputfile):
+   com_runpk = 'runpkr00 -d -g \"'+inputfile+'\"'
+   print(com_runpk)
+   run(com_runpk)
+   
+def call_teqc (char4, nine_fig, ant_hgt,ant_code, observer,mark_name, mark_latitude, mark_longitude, filename):
+   com_teqc = 'teqc -tr d +obs + -tbin 1d '+char4+' -O.mo '+char4+' -O.mn '+nine_fig+' -O.sl '+ant_hgt+' 0.3396 -0.0444 -O.an '+ant_code+' -O.o '+observer+' +O.c "Original BoN measurement of '+ant_hgt+'" +O.c "Mark Name: '+mark_name+'" +O.c "GDA94: '+str(mark_latitude)+' '+str(mark_longitude)+'" -O.ag OSGV '+filename+'.tgd'
+   print(com_teqc)
+   call(com_teqc)
+
+   
+   
+   
+   
 
 def main (argv):
    print(argv)
    inputfile = ''
-   outputfile = ''
+   #outputfile = ''
    nine_fig = ''
    ant_hgt = ''
    ant_code = ''
@@ -45,6 +59,7 @@ def main (argv):
    except getopt.GetoptError:
       print('rinex_preprocess.py -file <inputfile> -ninefig <nine_figure> -ant_hgt <slope to antenna> -ant_code <IGS antenna code>')
       sys.exit(2)
+   print( opts)
    for opt, arg in opts:
       if opt == '-h':
          print('test.py -i <inputfile> -o <outputfile>')
@@ -60,8 +75,8 @@ def main (argv):
       elif opt in ("-o", "--observer"):
          observer = arg
    print(inputfile)
-   get_smes(nine_fig)
-   get_char4(nine_fig)
+   #get_smes(nine_fig)
+   #get_char4(nine_fig)
    print('Input file is ', inputfile)
    print('Nine_Fig is ', nine_fig)
    print('Ant Hgt is ', ant_hgt)
@@ -73,13 +88,12 @@ def main (argv):
    print ('Four character ID is',get_char4.char4)
 
    input_st = inputfile.split('.')
-   com_runpk = 'runpkr00 -d -g '+inputfile
+   t0_runpk(inputfile)
+   #com_runpk = 'runpkr00 -d -g '+inputfile
    com_teqc = 'teqc -tr d +obs + -tbin 1d '+get_char4.char4+' -O.mo '+get_char4.char4+' -O.mn '+nine_fig+' -O.sl '+ant_hgt+' 0.3396 -0.0444 -O.an 12345 -O.o '+observer+' +O.c "Original BoN measurement of '+ant_hgt+'" +O.c "Mark Name: '+get_smes.mark_name+'" +O.c "GDA94: '+str(get_smes.mark_latitude)+' '+str(get_smes.mark_longitude)+'" -O.ag OSGV '+input_st[0]+'.tgd'
-   #teqc -O.mo "%%I" -O.mn %%H -O.sl %%K 0.3396 -0.0444 -O.an %%J -O.o "%%L" +O.c "Original BoN measurement of %%K" -O.ag OSGV %%~nG.tgd > RINEX\%%~nG.%
-   #f = open(char4+".17o", "w")
-   print(com_runpk)
+   #print(com_runpk)
    print(com_teqc)
-   run(com_runpk)
+   #run(com_runpk)
    #call(com_teqc, stdout=f)
    call(com_teqc)
    
@@ -87,7 +101,7 @@ def main (argv):
 
 if __name__ == "__main__":
    print(sys.argv[2:])
-   main(sys.argv[1:])
+   main(arguement)
    
    
    
