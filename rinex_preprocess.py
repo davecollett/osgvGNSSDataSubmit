@@ -9,10 +9,12 @@ transtable = "vicTransTable.csv"
 mark_name =''
 
 def get_smes (nine_fig):
+	print(nine_fig)
 	link = "https://maps.land.vic.gov.au/lvis/services/smesDataDelivery/getMarkInformation?searchType=NineFigureNumber&nineFigureNumber="+nine_fig
 	
 	with urllib.request.urlopen(link) as url:
 		s = url.read()
+	print(link)
 	get_smes.mark_name = json.loads(s.decode())["data"]["name"]
 	get_smes.mark_latitude = json.loads(s.decode())["data"]["latitude"]
 	get_smes.mark_longitude = json.loads(s.decode())["data"]["longitude"]
@@ -28,7 +30,8 @@ def get_char4 (nine_fig):
     		get_char4.char4 = get_char4.x
 
 
-def main(argv):
+def main (argv):
+   print(argv)
    inputfile = ''
    outputfile = ''
    nine_fig = ''
@@ -56,6 +59,7 @@ def main(argv):
          ant_code = arg
       elif opt in ("-o", "--observer"):
          observer = arg
+   print(inputfile)
    get_smes(nine_fig)
    get_char4(nine_fig)
    print('Input file is ', inputfile)
@@ -82,6 +86,7 @@ def main(argv):
    
 
 if __name__ == "__main__":
+   print(sys.argv[2:])
    main(sys.argv[1:])
    
    
