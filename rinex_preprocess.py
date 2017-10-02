@@ -68,15 +68,17 @@ def smes_connect (server, username, password,nine_fig, coverExists,smesComment):
 def smes_update (sessionKey,nine_fig, coverExists,smesComment):
    post = "{\"sessionKey\":"+sessionKey+",\"nineFigureNumber\":"+nine_fig+",\"coverExists\":"+coverExists+",\"comments\":"+smesComment+"}"
    link = smes_connect.domain+'lvis/services/smesSurveyMarkDataDelivery/updateMarkDetailsSubmission'
-
-   data = urllib.parse.urlencode(post)
-   print(data)
+   print(post)
+   print(link)
+   #data = urllib.parse.urlencode(post)
+   #print(data)
    #h = httplib.HTTPConnection(link)
-   #headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+   headers = {"Content-type": "application/json", "Accept": "text/plain,application/json"}
+   #headers = '{}'
    #h.request('POST', '', data, headers)
-   #req = urllib.Request(url,data)
-   #reponse = urllib.urlopen(req)
-   #print(response)
+   req = urllib.request.Request(link,post.encode("utf-8"),headers)
+   response = urllib.request.urlopen(req)
+   print(response.read())
    #r = h.getresponse()
    #print(r.read())
    
