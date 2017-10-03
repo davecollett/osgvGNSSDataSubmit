@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>534</width>
-    <height>780</height>
+    <width>542</width>
+    <height>821</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>20</x>
      <y>20</y>
      <width>491</width>
-     <height>731</height>
+     <height>781</height>
     </rect>
    </property>
    <property name="tabPosition">
@@ -32,32 +32,6 @@
     <attribute name="title">
      <string>Data</string>
     </attribute>
-    <widget class="QPushButton" name="pushSMES">
-     <property name="geometry">
-      <rect>
-       <x>64</x>
-       <y>200</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Check SMES</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="push4Char">
-     <property name="geometry">
-      <rect>
-       <x>172</x>
-       <y>200</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Check 4Char</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
@@ -80,8 +54,8 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>230</y>
-       <width>349</width>
+       <y>283</y>
+       <width>351</width>
        <height>16</height>
       </rect>
      </property>
@@ -92,8 +66,8 @@
     <widget class="QPushButton" name="pushButton_run">
      <property name="geometry">
       <rect>
-       <x>280</x>
-       <y>200</y>
+       <x>140</x>
+       <y>410</y>
        <width>75</width>
        <height>23</height>
       </rect>
@@ -106,8 +80,8 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>380</y>
-       <width>349</width>
+       <y>430</y>
+       <width>361</width>
        <height>16</height>
       </rect>
      </property>
@@ -118,8 +92,8 @@
     <widget class="QPushButton" name="pushButtonUpdateSmes">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>660</y>
+       <x>170</x>
+       <y>720</y>
        <width>101</width>
        <height>23</height>
       </rect>
@@ -131,10 +105,10 @@
     <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>250</y>
+       <x>80</x>
+       <y>150</y>
        <width>311</width>
-       <height>121</height>
+       <height>131</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -212,13 +186,44 @@
       </item>
      </layout>
     </widget>
+    <widget class="Line" name="line_3">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>135</y>
+       <width>349</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_run_2">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>410</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <strikeout>true</strikeout>
+      </font>
+     </property>
+     <property name="text">
+      <string>Submit</string>
+     </property>
+    </widget>
     <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>56</x>
-       <y>47</y>
-       <width>331</width>
-       <height>139</height>
+       <x>80</x>
+       <y>300</y>
+       <width>311</width>
+       <height>111</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -240,20 +245,6 @@
            <string>. . .</string>
           </property>
          </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_10">
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string>Nine Figure Number</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineEdit_ninefig"/>
         </item>
        </layout>
       </item>
@@ -305,83 +296,191 @@
      <property name="geometry">
       <rect>
        <x>80</x>
-       <y>400</y>
-       <width>289</width>
-       <height>251</height>
+       <y>60</y>
+       <width>311</width>
+       <height>71</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_5">
+     <layout class="QVBoxLayout" name="verticalLayout_7">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_12">
-          <item>
-           <widget class="QLabel" name="label_15">
-            <property name="text">
-             <string>Marker Post Exists</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBoxMp">
-            <property name="editable">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Nine Figure Number</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_13">
-          <item>
-           <widget class="QLabel" name="label_16">
-            <property name="text">
-             <string>Cover Exists</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBoxCvr">
-            <property name="editable">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QLineEdit" name="lineEdit_ninefig"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_17">
+        <item>
+         <widget class="QPushButton" name="pushSMES">
+          <property name="text">
+           <string>Check SMES</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_14">
-          <item>
-           <widget class="QLabel" name="label_17">
-            <property name="text">
-             <string>Mark Type</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="comboBoxMt">
-            <property name="editable">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QPushButton" name="push4Char">
+          <property name="text">
+           <string>Check 4Char</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_15">
+         <widget class="QPushButton" name="push4Char_2">
+          <property name="font">
+           <font>
+            <strikeout>true</strikeout>
+           </font>
+          </property>
+          <property name="text">
+           <string>Update 4Char</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>21</x>
+       <y>452</y>
+       <width>431</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QLabel" name="label_18">
-            <property name="text">
-             <string>GNSS Suitability</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_12">
+            <item>
+             <widget class="QLabel" name="label_15">
+              <property name="text">
+               <string>Marker Post Exists</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxMp">
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxMp">
+              <property name="font">
+               <font>
+                <strikeout>false</strikeout>
+               </font>
+              </property>
+              <property name="text">
+               <string>Update SMES</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBoxGnss">
-            <property name="editable">
-             <bool>false</bool>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout_13">
+            <item>
+             <widget class="QLabel" name="label_16">
+              <property name="text">
+               <string>Cover Exists</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxCvr">
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxCvr">
+              <property name="font">
+               <font>
+                <strikeout>false</strikeout>
+               </font>
+              </property>
+              <property name="text">
+               <string>Update SMES</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_14">
+            <item>
+             <widget class="QLabel" name="label_17">
+              <property name="text">
+               <string>Mark Type</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxMt">
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxMt">
+              <property name="font">
+               <font>
+                <strikeout>false</strikeout>
+               </font>
+              </property>
+              <property name="text">
+               <string>Update SMES</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_15">
+            <item>
+             <widget class="QLabel" name="label_18">
+              <property name="text">
+               <string>GNSS Suitability</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="comboBoxGnss">
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBoxGnss">
+              <property name="font">
+               <font>
+                <strikeout>false</strikeout>
+               </font>
+              </property>
+              <property name="text">
+               <string>Update SMES</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
@@ -390,12 +489,34 @@
           <item>
            <widget class="QLabel" name="label_19">
             <property name="text">
-             <string>Ground Level                           </string>
+             <string>Ground Level                         </string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="fieldGroundLevel"/>
+           <widget class="QLineEdit" name="fieldGroundLevel">
+            <property name="maximumSize">
+             <size>
+              <width>144</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxGroundLevel">
+            <property name="font">
+             <font>
+              <strikeout>false</strikeout>
+             </font>
+            </property>
+            <property name="text">
+             <string>Update SMES                 </string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -447,6 +568,16 @@
     <zorder>label_19</zorder>
     <zorder>pushButtonUpdateSmes</zorder>
     <zorder>smesComment</zorder>
+    <zorder>checkBoxMp</zorder>
+    <zorder>checkBoxCvr</zorder>
+    <zorder>checkBoxMt</zorder>
+    <zorder>checkBoxGnss</zorder>
+    <zorder>checkBoxGroundLevel</zorder>
+    <zorder>lineEdit_ninefig</zorder>
+    <zorder></zorder>
+    <zorder>line_3</zorder>
+    <zorder>push4Char_2</zorder>
+    <zorder>pushButton_run_2</zorder>
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
@@ -517,6 +648,45 @@
      </property>
      <property name="editable">
       <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushLogout">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>360</y>
+       <width>121</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Force Logout</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelSessionKey">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>420</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SessionKey</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelSessionKey_2">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>400</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>SessionKey:</string>
      </property>
     </widget>
     <widget class="QWidget" name="">

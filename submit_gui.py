@@ -60,9 +60,19 @@ def smes_connect(self):
     username = window.smesUsername.text()
     password = window.smesPassword.text()
     nine_fig = window.lineEdit_ninefig.text()
+    markerPostExists = window.comboBoxMp.currentText()
     coverExists = window.comboBoxCvr.currentText()
+    markType = window.comboBoxMt.currentText()
+    gnssSuitability = window.comboBoxGnss.currentText()
+    groundToMarkOffset = window.fieldGroundLevel.text()
     smesComment = window.smesComment.toPlainText()
-    rinex_preprocess.smes_connect(server, username, password,nine_fig, coverExists,smesComment)
+    checkBoxMp = window.checkBoxMp
+    checkBoxCvr = window.checkBoxCvr
+    checkBoxMt = window.checkBoxMt
+    checkBoxGnss = window.checkBoxGnss
+    checkBoxGroundLevel = window.checkBoxGroundLevel
+    rinex_preprocess.smes_connect(server, username, password,nine_fig, markerPostExists, checkBoxMp, coverExists, checkBoxCvr, markType, checkBoxMt, gnssSuitability, checkBoxGnss, groundToMarkOffset, checkBoxGroundLevel,smesComment)
+    window.labelSessionKey.setText(rinex_preprocess.smes_connect.sessionKey)
 
 def smes_update(self):
     sessionKey = smes_connect.sessionKey
@@ -71,7 +81,10 @@ def smes_update(self):
     smesComment = window.smesComment.toPlainText()
     rinex_preprocess.smes_update(sessionKey, nine_fig, coverExists,smesComment)
 
-
+def smes_logout(self):
+    server = window.comboBoxServer.currentText()
+    sessionKey = window.labelSessionKey.text()
+    rinex_preprocess.smes_logout(server, sessionKey)
 
 class MyApp(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -88,7 +101,7 @@ class MyApp(QtGui.QMainWindow, Ui_MainWindow):
         self.push4Char.clicked.connect(check_char4)
         self.pushButton_run.clicked.connect(process)
         self.pushButtonUpdateSmes.clicked.connect(smes_connect)
-    
+        self.pushLogout.clicked.connect(smes_logout)
  
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)

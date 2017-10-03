@@ -23,6 +23,25 @@ def get_smes (nine_fig):
 	get_smes.markType = json.loads(s.decode())["data"]["markType"]
 	get_smes.gnssSuitability = json.loads(s.decode())["data"]["gnssSuitability"]
 	get_smes.groundToMarkOffset = json.loads(s.decode())["data"]["groundToMarkOffset"]
+	get_smes.status = json.loads(s.decode())["data"]["status"]
+	get_smes.scn = json.loads(s.decode())["data"]["scn"]
+	get_smes.easting = json.loads(s.decode())["data"]["easting"]
+	get_smes.northing = json.loads(s.decode())["data"]["northing"]
+	get_smes.zone = json.loads(s.decode())["data"]["zone"]
+	get_smes.ahdHeight = json.loads(s.decode())["data"]["ahdHeight"]
+	get_smes.ellipsoidHeight = json.loads(s.decode())["data"]["ellipsoidHeight"]
+	get_smes.hUncertainty = json.loads(s.decode())["data"]["hUncertainty"]
+	get_smes.vUncertainty = json.loads(s.decode())["data"]["vUncertainty"]
+	get_smes.hOrder = json.loads(s.decode())["data"]["hOrder"]
+	get_smes.vOrder = json.loads(s.decode())["data"]["vOrder"]
+	get_smes.gda94PublishedDate = json.loads(s.decode())["data"]["gda94PublishedDate"]
+	get_smes.gda94Technique = json.loads(s.decode())["data"]["gda94Technique"]
+	get_smes.gda94Measurements = json.loads(s.decode())["data"]["gda94Measurements"]
+	get_smes.gda94Source = json.loads(s.decode())["data"]["gda94Source"]
+	get_smes.ahdLevelSection = json.loads(s.decode())["data"]["ahdLevelSection"]
+	get_smes.ahdPublishedDate = json.loads(s.decode())["data"]["ahdPublishedDate"]
+	get_smes.ahdTechnique = json.loads(s.decode())["data"]["ahdTechnique"]
+	get_smes.ahdSource = json.loads(s.decode())["data"]["ahdSource"]
 	return;
 
 def get_char4 (nine_fig):
@@ -44,8 +63,23 @@ def call_teqc (char4, nine_fig, ant_hgt,ant_code, observer,mark_name, mark_latit
    print(com_teqc)
    call(com_teqc)
 
-#def update_smes (server, username, password, nine_fig, markPostExists, coverExists, markType, gnssSuitability, groundToMarkOffset):
-def smes_connect (server, username, password,nine_fig, coverExists,smesComment):
+
+def smes_logout (server,sessionKey):
+   if server == 'PROD':
+     smes_connect.domain = 'https://maps.land.vic.gov.au/'
+   elif server == 'UAT':
+     smes_connect.domain = 'https://maps.test.land.vic.gov.au/'
+   elif server == 'SYSTEST':
+     smes_connect.domain = 'https://maps.sys.test.land.vic.gov.au/'
+   print(server)
+   link = smes_connect.domain+'lvis/services/smesSurveyMarkDataDelivery/smesUserLogout?sessionKey='+sessionKey
+   print(link)
+   with urllib.request.urlopen(link) as url:
+      s = url.read()
+   print(s)
+
+
+def smes_connect (server, username, password,nine_fig, markerPostExists, checkBoxMp, coverExists, checkBoxCvr, markType, checkBoxMt, gnssSuitability, checkBoxGnss, groundToMarkOffset, checkBoxGroundLevel,smesComment):
    if server == 'PROD':
      smes_connect.domain = 'https://maps.land.vic.gov.au/'
    elif server == 'UAT':
@@ -60,13 +94,37 @@ def smes_connect (server, username, password,nine_fig, coverExists,smesComment):
    print(s)
    smes_connect.sessionKey = json.loads(s.decode())["data"]["sessionKey"]
    print(smes_connect.sessionKey)
+   
    #nine_fig = window.lineEdit_ninefig.text()
    #coverExists = window.comboBoxCvr.currentText()
    #smesComment = window.smesComment.text()
-   smes_update(smes_connect.sessionKey, nine_fig, coverExists,smesComment)
+   smes_update(smes_connect.sessionKey, nine_fig, markerPostExists, checkBoxMp, coverExists, checkBoxCvr, markType, checkBoxMt, gnssSuitability, checkBoxGnss, groundToMarkOffset, checkBoxGroundLevel ,smesComment)
    
-def smes_update (sessionKey,nine_fig, coverExists,smesComment):
-   post = "{\"sessionKey\":"+sessionKey+",\"nineFigureNumber\":"+nine_fig+",\"coverExists\":"+coverExists+",\"comments\":"+smesComment+"}"
+   
+   
+def smes_update (sessionKey, nine_fig, markerPostExists, checkBoxMp, coverExists, checkBoxCvr, markType, checkBoxMt, gnssSuitability, checkBoxGnss, groundToMarkOffset, checkBoxGroundLevel ,smesComment):
+   #post = "{\"sessionKey\":"+sessionKey+",\"nineFigureNumber\":"+nine_fig+",\"coverExists\":"+coverExists+",\"comments\":"+smesComment+"}"
+   postStart = "{\"sessionKey\":"+sessionKey+",\"nineFigureNumber\":"+nine_fig
+   postEnd = ",\"comments\":"+smesComment+"}"
+   post =postStart
+   
+   if (checkBoxMp.isChecked() and markerPostExists != ''):
+     post = post+",\"markerPostExists\":"+markerPostExists
+
+   if (checkBoxCvr.isChecked() and coverExists != ''):
+     post = post+",\"coverExists\":"+coverExists
+     
+   if (checkBoxMt.isChecked() and markType != ''):
+     post = post+",\"markType\":"+markType
+     
+   if (checkBoxGnss.isChecked() and gnssSuitability != ''):
+     post = post+",\"gnssSuitability\":"+gnssSuitability
+     
+   if (checkBoxGroundLevel.isChecked() and groundToMarkOffset != ''):
+     post = post+",\"groundToMarkOffset\":"+groundToMarkOffset
+     
+   post = post+postEnd
+   
    link = smes_connect.domain+'lvis/services/smesSurveyMarkDataDelivery/updateMarkDetailsSubmission'
    print(post)
    print(link)
@@ -81,6 +139,10 @@ def smes_update (sessionKey,nine_fig, coverExists,smesComment):
    print(response.read())
    #r = h.getresponse()
    #print(r.read())
+   
+
+   
+   
    
 #{"sessionKey":<value>,
 #"nineFigureNumber":<value>,
